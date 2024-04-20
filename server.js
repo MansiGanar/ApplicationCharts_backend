@@ -53,9 +53,18 @@ const DataModel = mongoose.model("Data", dataSchema);
 // Read data from jsondata.json and save to MongoDB
 const rawData = fs.readFileSync("jsondata.json");
 const jsonData = JSON.parse(rawData);
-DataModel.insertMany(jsonData)
-  .then(() => console.log("Data imported successfully"))
-  .catch((err) => console.error("Error importing data to MongoDB:", err));
+async function insertData() {
+  try {
+    for (let i = 0; i < data.length; i++) {
+      await MyModel.create(data[i]);
+    }
+    console.log("Data inserted successfully");
+  } catch (err) {
+    console.error("Error inserting data:", err);
+  }
+}
+
+insertData();
 
 // Define route to fetch data from MongoDB
 app.get("/api/data", async (req, res) => {
