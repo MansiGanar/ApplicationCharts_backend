@@ -13,14 +13,19 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose
-  .connect(`${dbURL}`, {
-    bufferCommands: false,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+async function connectToMongoDB() {
+  try {
+    await mongoose.connect(`${dbURL}`, {
+      // useNewUrlParser: true,
+      // useUnifiedTopology: true,
+    });
+    console.log("MongoDB connected");
+  } catch (err) {
+    console.error("MongoDB connection error:", err);
+  }
+}
+
+connectToMongoDB();
 
 // Define Schema
 const dataSchema = new mongoose.Schema({
