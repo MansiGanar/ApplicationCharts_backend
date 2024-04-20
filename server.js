@@ -55,8 +55,8 @@ const rawData = fs.readFileSync("jsondata.json");
 const jsonData = JSON.parse(rawData);
 async function insertData() {
   try {
-    for (let i = 0; i < data.length; i++) {
-      await MyModel.create(data[i]);
+    for (let i = 0; i < jsonData.length; i++) {
+      await DataModel.create(jsonData[i]);
     }
     console.log("Data inserted successfully");
   } catch (err) {
