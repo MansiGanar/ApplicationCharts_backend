@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const fs = require("fs");
 require("dotenv").config();
+import "./jsondata.json";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -15,8 +16,8 @@ app.use(express.json());
 // Connect to MongoDB
 mongoose
   .connect(`${dbURL}`, {
-    // useNewUrlParser: true,
-    // useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
