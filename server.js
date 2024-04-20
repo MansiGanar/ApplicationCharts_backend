@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const fs = require("fs");
 require("dotenv").config();
-import "./jsondata.json";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -16,6 +15,7 @@ app.use(express.json());
 // Connect to MongoDB
 mongoose
   .connect(`${dbURL}`, {
+    bufferCommands: false,
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
